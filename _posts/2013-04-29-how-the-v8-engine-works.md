@@ -20,7 +20,7 @@ The aim of this article is to show and to understand **how V8 works, in order to
 
 
 #### Hidden class
-JavaScript is a protoptye-based language: there are **no classes** and objects are created by using a cloning process. Also, JavaScript is dynamically typed: types and type informations are not explicit and properties can be added and deleted to objects on the fly. Accessing types and properties effectively makes a first big challenge for V8. Instead of using a dictionnary-like data structure for storing object properties and doing a dynamic lookup to resolve the property location (like most JavaScript engine do), V8 creates **hidden classes**, at runtime, in order to have an internal representation of the type system and to improve the property access time.
+JavaScript is a prototype-based language: there are **no classes** and objects are created by using a cloning process. Also, JavaScript is dynamically typed: types and type informations are not explicit and properties can be added and deleted to objects on the fly. Accessing types and properties effectively makes a first big challenge for V8. Instead of using a dictionary-like data structure for storing object properties and doing a dynamic lookup to resolve the property location (like most JavaScript engine do), V8 creates **hidden classes**, at runtime, in order to have an internal representation of the type system and to improve the property access time.
 
 Let's have for instance a "Point" function and the creation of two "Point" objects:
 
@@ -42,7 +42,7 @@ In fact, V8 **creates a new hidden class everytime the constructor function decl
 Everytime a new hidden class is created, the previous one is updated with a class transition indicating what hidden class has to be used instead of it.
 
 ##### Code optimization
-Because V8 creates a new hidden class for each property, hidden class creation should be kept to a minimum. To do this, try to avoid to add properties after the object creation and always initialize object members in the same order (to avoid the creation of different three of hidden classes).
+Because V8 creates a new hidden class for each property, hidden class creation should be kept to a minimum. To do this, try to avoid to add properties after the object creation and always initialize object members in the same order (to avoid the creation of different tree of hidden classes).
 
 \[Update\] Another trick:
 Monomorphic operations are operations which only work on objects with the same hidden class.
@@ -106,4 +106,3 @@ V8 has two compilers!
 <a href="http://v8-io12.appspot.com" title="slides" target="_blank">slides</a>.
 - V8: an open source JavaScript engine: 
 <a href="http://www.youtube.com/watch?v=hWhMKalEicY" title="video" target="_blank">video</a> of Lars Bak, V8 core engineer.
-- Nikkei Electronics Asia blog post: <a href="http://techon.nikkeibp.co.jp/article/HONSHI/20090106/163615/" title="go to techon.nikkeibp.co.jp" target="_blank">Why Is the New Google V8 Engine So Fast?</a>
